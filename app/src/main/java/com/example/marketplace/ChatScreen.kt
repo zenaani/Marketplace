@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.marketplace.ui.theme.Background
 import com.example.marketplace.ui.theme.Green
+import com.example.marketplace.ui.theme.Purple40
 import com.example.marketplace.ui.theme.TextColor
 
 @Composable
@@ -53,6 +54,7 @@ fun ChatScreen(navController: NavController) {
     var visible by remember { mutableStateOf("0") }
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
 
+        //Top Bar
         Row(modifier = Modifier
             .fillMaxWidth()
             .background(Background)
@@ -63,24 +65,25 @@ fun ChatScreen(navController: NavController) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Rounded.ArrowBack, contentDescription = null, modifier = Modifier.clickable { navController.navigate("home_screen") })
                 Spacer(modifier = Modifier.padding(3.dp))
-                Image(painter = painterResource(id = R.drawable.ic_launcher_background),modifier = Modifier
+                Image(painter = painterResource(id = R.drawable.dp),modifier = Modifier
                     .size(30.dp)
                     .clip(CircleShape), contentDescription = null)
                 Spacer(modifier = Modifier.padding(5.dp))
-                Text(text = "Lumos", fontWeight = FontWeight.Bold, color = Color.White, fontSize = 20.sp)
+                Text(text = "Group 1", fontWeight = FontWeight.Bold, color = Color.White, fontSize = 20.sp)
             }
 
-            Row() {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Rounded.Phone, contentDescription = null)
                 Spacer(modifier = Modifier.padding(8.dp))
                 Icon(Icons.Rounded.ShoppingCart, contentDescription = null)
                 Spacer(modifier = Modifier.padding(8.dp))
-                Icon(Icons.Rounded.Menu, contentDescription = null)
+                Icon(painterResource(id = R.drawable.threedot), contentDescription = null, modifier = Modifier.size(20.dp))
             }
         }
 
         Column() {
 
+            //Attach Box
             if (visible == "1") {
                 Column(modifier = Modifier
                     .fillMaxWidth()
@@ -89,66 +92,32 @@ fun ChatScreen(navController: NavController) {
                     .padding(30.dp)) {
 
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                        Box(modifier = Modifier
-                            .size(70.dp)
-                            .background(Green, CircleShape)) {
-                            Icon(Icons.Rounded.Email, contentDescription = null, modifier = Modifier.align(Alignment.Center))
-                        }
-
-                        Box(modifier = Modifier
-                            .size(70.dp)
-                            .background(Green, CircleShape)) {
-                            Icon(Icons.Rounded.Email, contentDescription = null, modifier = Modifier.align(Alignment.Center))
-                        }
-
-                        Box(modifier = Modifier
-                            .size(70.dp)
-                            .background(Green, CircleShape)) {
-                            Icon(Icons.Rounded.Email, contentDescription = null, modifier = Modifier.align(Alignment.Center))
-                        }
+                        AttachRound()
+                        AttachRound()
+                        AttachRound()
                     }
 
                     Spacer(modifier = Modifier.padding(10.dp))
 
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                        Box(modifier = Modifier
-                            .size(70.dp)
-                            .background(Green, CircleShape)) {
-                            Icon(Icons.Rounded.Email, contentDescription = null, modifier = Modifier.align(Alignment.Center))
-                        }
-
-                        Box(modifier = Modifier
-                            .size(70.dp)
-                            .background(Green, CircleShape)) {
-                            Icon(Icons.Rounded.Email, contentDescription = null, modifier = Modifier.align(Alignment.Center))
-                        }
-
-                        Box(modifier = Modifier
-                            .size(70.dp)
-                            .background(Green, CircleShape)) {
-                            Icon(Icons.Rounded.Email, contentDescription = null, modifier = Modifier.align(Alignment.Center))
-                        }
+                        AttachRound()
+                        AttachRound()
+                        AttachRound()
                     }
 
                     Spacer(modifier = Modifier.padding(10.dp))
 
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                        Box(modifier = Modifier
-                            .size(70.dp)
-                            .background(Green, CircleShape)) {
-                            Icon(Icons.Rounded.Email, contentDescription = null, modifier = Modifier.align(Alignment.Center))
-                        }
+                        AttachRound()
+                        AttachRound()
 
                         Box(modifier = Modifier
                             .size(70.dp)
-                            .background(Green, CircleShape)) {
-                            Icon(Icons.Rounded.Email, contentDescription = null, modifier = Modifier.align(Alignment.Center))
-                        }
-
-                        Box(modifier = Modifier
-                            .size(70.dp)
-                            .background(Green, CircleShape).clickable { navController.navigate("market_place_screen") }) {
-                            Icon(Icons.Rounded.Email, contentDescription = null, modifier = Modifier.align(Alignment.Center))
+                            .background(Purple40, CircleShape)
+                            .clickable { navController.navigate("market_place_screen") }) {
+                            Icon(Icons.Rounded.ShoppingCart, contentDescription = "market", modifier = Modifier
+                                .align(Alignment.Center)
+                                .size(25.dp))
                         }
                     }
 
@@ -169,12 +138,12 @@ fun ChatScreen(navController: NavController) {
                         Text("Message")
                     }
 
-                    Row() {
-                        Icon(Icons.Rounded.ThumbUp, contentDescription = null, modifier = Modifier.clickable { visible = "1" })
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(painterResource(id = R.drawable.attach), contentDescription = null, modifier = Modifier.size(20.dp).clickable { visible = "1" })
                         Spacer(modifier = Modifier.padding(8.dp))
-                        Icon(Icons.Rounded.Email, contentDescription = null)
+                        Icon(painterResource(id = R.drawable.rupee), contentDescription = null)
                         Spacer(modifier = Modifier.padding(8.dp))
-                        Icon(Icons.Rounded.AccountBox, contentDescription = null)
+                        Icon(painterResource(id = R.drawable.camera), contentDescription = null, modifier = Modifier.size(20.dp))
 
                     }
 
@@ -195,10 +164,15 @@ fun ChatScreen(navController: NavController) {
 
     }
 
+}
 
-
-
-
-
-
+@Composable
+fun AttachRound() {
+    Box(modifier = Modifier
+        .size(70.dp)
+        .background(Green, CircleShape)) {
+        Icon(painterResource(id = R.drawable.camera), contentDescription = null, modifier = Modifier
+            .align(Alignment.Center)
+            .size(25.dp))
+    }
 }

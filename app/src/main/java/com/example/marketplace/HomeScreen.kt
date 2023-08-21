@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Lock
@@ -45,22 +46,24 @@ fun HomeScreen(navController: NavController) {
 
         Column(modifier = Modifier.background(Background)) {
 
+            //Top Bar
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp), horizontalArrangement = Arrangement.SpaceBetween) {
 
                 Text("WhatsApp", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = TextColor)
 
-                Row() {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Rounded.Search, contentDescription = null)
                     Spacer(modifier = Modifier.padding(7.dp))
-                    Icon(Icons.Rounded.Lock, contentDescription = null)
+                    Icon(painterResource(id = R.drawable.camera1), contentDescription = null, modifier = Modifier.size(18.dp))
                     Spacer(modifier = Modifier.padding(7.dp))
-                    Icon(Icons.Rounded.Menu, contentDescription = null)
+                    Icon(painterResource(id = R.drawable.threedot), contentDescription = null, modifier = Modifier.size(18.dp))
                 }
             }
 
 
+            //Chats Status Calls Bar
             Row(modifier = Modifier
                 .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
 
@@ -126,30 +129,26 @@ fun HomeScreen(navController: NavController) {
         }
 
         if(selected == "1") {
+
+            //Chat Boxes
             Column {
                 Box(Modifier.clickable { navController.navigate("chat_screen") }) {
                     GroupChat()
                 }
 
-                Box(Modifier.clickable {  }) {
-                    GroupChat()
-                }
-
-                Box(Modifier.clickable {  }) {
-                    GroupChat()
-                }
-
-                Box(Modifier.clickable {  }) {
-                    GroupChat()
-                }
-
-                Box(Modifier.clickable {  }) {
-                    GroupChat()
+                LazyColumn() {
+                    items(7) {
+                        Box(Modifier.clickable {  }) {
+                            GroupChat()
+                        }
+                    }
                 }
 
             }
         }
     }
+
+
 }
 
 @Composable
@@ -158,12 +157,12 @@ fun GroupChat() {
         .fillMaxWidth()
         .padding(12.dp, 15.dp), horizontalArrangement = Arrangement.SpaceBetween) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(painter = painterResource(id = R.drawable.ic_launcher_background),modifier = Modifier
+            Image(painter = painterResource(id = R.drawable.dp),modifier = Modifier
                 .size(50.dp)
                 .clip(CircleShape), contentDescription = null)
             Spacer(modifier = Modifier.padding(8.dp))
             Column() {
-                Text("Group 1", color = Color.White, fontWeight = FontWeight.Bold)
+                Text("Group", color = Color.White, fontWeight = FontWeight.Bold)
                 Text("Zen: Hahah", color = TextColor, fontWeight = FontWeight.SemiBold)
             }
         }
